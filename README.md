@@ -1,6 +1,6 @@
 # ctrlp-swoop
 
-CtrlP port of help-swoop
+CtrlP port of helm-swoop
 
 ## Usage
 
