@@ -3,9 +3,16 @@ if exists('g:loaded_ctrlp_swoop') && g:loaded_ctrlp_swoop
 endif
 let g:loaded_ctrlp_swoop = 1
 
+let s:command = get(g:, 'ctrlp_swoop_command', 'ag --vimgrep %s')
+let s:minlen = get(g:, 'ctrlp_swoop_minlen', 3)
+
 function s:match(item)
 	let str = a:item['str']
-	return split(system('jvgrep -r ' . shellescape(str) . ' .'), "\n")
+  if len(str) < s:minlen
+    throw "too short"
+  endif
+  let command = stridx(s:command, '%s') != -1 ? printf(s:command, shellescape(str)) : (s:command . ' ' . shellescape(str))
+	return split(system(command, "\n"))
 endfunction
 
 let s:swoop_var = {
