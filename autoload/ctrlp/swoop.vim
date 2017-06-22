@@ -12,7 +12,7 @@ function s:match(item)
     throw "too short"
   endif
   let command = stridx(s:command, '%s') != -1 ? printf(s:command, shellescape(str)) : (s:command . ' ' . shellescape(str))
-  return split(system(command, "\n"))
+  return split(system(command), "\n")
 endfunction
 
 let s:swoop_var = {
