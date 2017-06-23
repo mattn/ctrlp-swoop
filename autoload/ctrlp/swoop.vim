@@ -42,7 +42,7 @@ function! ctrlp#swoop#accept(mode, str)
   if len(token) > 0
     call ctrlp#acceptfile(a:mode, token[0])
   endif
-  if len(token) > 1
+  if len(token) > 1 && token[1] =~ '^[0-9]\+$'
     exe 'norm! ' . token[1] . 'Gzz'
   endif
 endfunction
